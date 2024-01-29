@@ -1,0 +1,21 @@
+---
+- name: Copy file
+  hosts: all  ## Mandatory field
+  
+
+  tasks:
+  - name: Copy file install.sh
+    ansible.builtin.copy:
+      src: /home/quyenhl/DevOps/Docker/install.sh
+      dest: /home/quyenhl1
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Run install.sh to install Docker
+    register: output
+    ansible.builtin.shell: bash /home/quyenhl1/install.sh  
+
+  - name: Display Debug
+    ansible.builtin.debug: 
+      var: output.stdout_lines
